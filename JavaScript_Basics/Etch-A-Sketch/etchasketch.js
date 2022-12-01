@@ -1,4 +1,5 @@
 let size = 16
+let currentMode = 'black'
 
 //Grab the conatiner div in the body of the HTML
 const container = document.querySelector('#container');
@@ -25,11 +26,13 @@ document.body.onmouseup = () => (mouseDown = false);
 
 
 function changeColor(e) {
-    if (e.type === 'mouseover' && mouseDown) {
-        e.target.style['background-color'] = 'black'
-        console.log(mouseDown);
-    }
-}
+    if (e.type === 'mouseover' && !mouseDown) return
+    if (currentMode === 'random'){
+        e.target.style['background-color'] = 'blue';
+    } else {
+    e.target.style['background-color'] = 'black';
+    };
+};
 
 const clear = document.getElementById('clear');
 
@@ -38,6 +41,13 @@ clear.addEventListener('click', clearGrid);
 function clearGrid(){
     gridItems.forEach((gridItem) => {
         gridItem.style['background-color'] = 'white';
+        currentMode = 'black'
     })
 }
 
+const randomColor = document.getElementById('random');
+randomColor.addEventListener('click', setMode);
+
+function setMode(e){
+    currentMode = e.target.id;
+}
