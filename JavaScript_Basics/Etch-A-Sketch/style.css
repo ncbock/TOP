@@ -1,0 +1,25 @@
+.grid-container{
+    background-color: white;
+    display: grid;
+    text-align: center;
+    height: 500px;
+    width: 500px;
+    grid-template-columns: repeat(16, auto);
+    grid-template-rows: repeat(16, auto);
+    border-style: solid;
+    border-width: 1px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grid-item{
+ 
+}
+
+h1{
+    text-align: center;
+}
+
+html {
+    background-color: rgb(125,125,130);
+}
