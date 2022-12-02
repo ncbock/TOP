@@ -1,17 +1,21 @@
 .grid-container{
     background-color: white;
     display: grid;
-    text-align: center;
     height: 500px;
     width: 500px;
     border-style: solid;
     border-width: 1px;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 12px 12px 12px 12px;
 }
 
 .grid-item{
  
+}
+
+header {
+    justify-content: center;
 }
 
 h1{
@@ -19,5 +23,31 @@ h1{
 }
 
 html {
-    background-color: rgb(125,125,130);
+    background-color: #E6F1FD;
+}
+
+button {
+    width: 150px;
+    height: 50px;
+    background-color: inherit;
+    border-radius: 1em 1em 1em 1em;
+    border-width: 1px;
+    border-color: 'black';
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+.main{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
 }

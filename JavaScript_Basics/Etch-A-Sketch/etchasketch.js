@@ -2,7 +2,7 @@ let defaultSize = 16
 let currentMode = 'black'
 
 //Grab the conatiner div in the body of the HTML
-const container = document.querySelector('#container');
+const container = document.getElementById('container');
 
 //Function for creating the grid on load and when grid is resized
 function createGrid(size){
@@ -14,7 +14,7 @@ function createGrid(size){
         const div = document.createElement('div');//Create a single div
         div.classList.add("grid-item") 
         container.appendChild(div);
-    }
+     }
    
     const gridItems = document.querySelectorAll(".grid-item");
     gridItems.forEach((gridItem) => {
