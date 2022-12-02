@@ -4,15 +4,18 @@ let currentMode = 'black'
 //Grab the conatiner div in the body of the HTML
 const container = document.querySelector('#container');
 
-//Create Global Grid Items Variable
-
-
+//Function for creating the grid on load and when grid is resized
 function createGrid(size){
+    const grid = document.getElementById('container');
+    grid.style.gridTemplateColumns = `repeat(${size},auto)`;
+    grid.style.gridTemplateRows = `repeat(${size},auto)`;
+    
     for (let i = 0; i < size * size; i++){
         const div = document.createElement('div');//Create a single div
         div.classList.add("grid-item") 
         container.appendChild(div);
     }
+   
     const gridItems = document.querySelectorAll(".grid-item");
     gridItems.forEach((gridItem) => {
     gridItem.addEventListener('mousedown', changeColor);
@@ -20,11 +23,13 @@ function createGrid(size){
     });
 };
 
+
+//determine if the mouse is down or not. If mouse not down squares will not change color.
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
-
+//Change color of squares
 function changeColor(e) {
     if (e.type === 'mouseover' && !mouseDown) return
     if (currentMode === 'random'){
@@ -50,13 +55,22 @@ clear.addEventListener('click', clearGrid);
 //Add event listener for the Size button
 const sizeButton = document.getElementById('size');
 sizeButton.addEventListener('click', () => {
-    changeSize();
-    clearGrid();
-    createGrid(defaultSize);
+    changeSize(); // get the size of new grid
+    removeOldGridItems(); //remove old items created
+    createGrid(defaultSize);//create new items with correct size
 });
 
+
+//Remove old divs when size is changed
+function removeOldGridItems(){
+    const items = document.getElementById("container");
+    while(items.lastElementChild){
+        items.removeChild(items.lastElementChild);
+    }
+}
 //Clears the Grid
 function clearGrid(){
+    gridItems = document.querySelectorAll('.grid-item')
     gridItems.forEach((gridItem) => {
         gridItem.style['background-color'] = 'white';
         currentMode = 'black'
@@ -79,6 +93,7 @@ function randomColorValue (){
 
 function changeSize(){
     defaultSize = prompt('How big would you like the Grid?');
+    console.log(defaultSize);
 }
 
 window.onload = () => {
