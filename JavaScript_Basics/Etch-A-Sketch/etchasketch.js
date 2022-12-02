@@ -50,7 +50,7 @@ function changeColor(e) {
         const randomB = randomColorValue()
         e.target.style['background-color'] = `rgb(${randomR},${randomG},${randomB})`;
     } else {
-    e.target.style['background-color'] = 'black';
+    e.target.style['background-color'] = currentMode;
     };
 };
 
@@ -72,6 +72,10 @@ sizeButton.addEventListener('click', () => {
     createGrid(defaultSize);//create new items with correct size
 });
 
+const colorPicker = document.getElementById('colorPicker');
+colorPicker.addEventListener('input', (e) => {
+    currentMode = e.target.value
+})
 
 //Remove old divs when size is changed
 function removeOldGridItems(){
