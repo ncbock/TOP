@@ -110,7 +110,11 @@ function randomColorValue (){
 };
 
 function changeSize(){
-    defaultSize = prompt('How big would you like the Grid?');
+    newSize = prompt('How big would you like the Grid?');
+    while (newSize > 100) {
+        newSize = prompt('Max Grid size is 100 x 100');
+    }
+    defaultSize = newSize
 }
 
 window.onload = () => {
