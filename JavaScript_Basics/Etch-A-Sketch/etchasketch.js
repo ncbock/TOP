@@ -14,6 +14,18 @@ function createGrid(size){
         const div = document.createElement('div');//Create a single div
         div.classList.add("grid-item") 
         container.appendChild(div);
+        if (i === 0){
+            div.classList.add('top-left');
+        }
+        if (i === size-1){
+            div.classList.add('top-right');
+        }
+        if(i === (size * size) - size) {
+            div.classList.add('bottom-left');
+        }
+        if(i === (size * size)- 1){
+            div.classList.add('bottom-right')
+        }
      }
    
     const gridItems = document.querySelectorAll(".grid-item");

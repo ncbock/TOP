@@ -10,6 +10,22 @@
     border-radius: 12px 12px 12px 12px;
 }
 
+.top-left{
+    border-top-left-radius: 12px;
+}
+
+.top-right{
+    border-top-right-radius: 12px;
+}
+
+.bottom-left{
+    border-bottom-left-radius: 12px;
+}
+
+.bottom-right{
+    border-bottom-right-radius: 12px;
+}
+
 .grid-item{
  
 }
