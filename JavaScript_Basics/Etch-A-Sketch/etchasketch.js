@@ -81,8 +81,10 @@ function clearGrid(){
 function setMode(e){
     if(e.target.id === 'random'){
         currentMode = e.target.id;
-    }else{
-        currentMode = 'black'
+    }else if (e.target.id === 'black'){
+        currentMode = e.target.id;
+    }else {
+        currentMode = currentMode;
     }
 }
 
@@ -93,7 +95,6 @@ function randomColorValue (){
 
 function changeSize(){
     defaultSize = prompt('How big would you like the Grid?');
-    console.log(defaultSize);
 }
 
 window.onload = () => {
