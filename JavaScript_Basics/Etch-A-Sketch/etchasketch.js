@@ -72,6 +72,7 @@ sizeButton.addEventListener('click', () => {
     createGrid(defaultSize);//create new items with correct size
 });
 
+//Add event listener for Color Picker
 const colorPicker = document.getElementById('colorPicker');
 colorPicker.addEventListener('input', (e) => {
     currentMode = e.target.value
