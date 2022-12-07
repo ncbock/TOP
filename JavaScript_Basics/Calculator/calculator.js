@@ -11,6 +11,9 @@ function multiply (a,b) {
 }
 
 function divide (a, b) {
+    if (b === 0){
+        return alert("You can't divide by 0!");
+    }
     return a / b;
 }
 
@@ -86,10 +89,10 @@ operators.forEach((operator) => {
     operator.addEventListener('click', (e) => {
         if (!operand){
             firstOperand = Number(display.textContent);
-            display.textContent += ` ${e.target.textContent} `
             operand = true;
             procedure = e.target.textContent;
-        };
+            display.textContent += ` ${e.target.textContent} `;
+        } 
     });
 });
 
@@ -102,9 +105,8 @@ equalButton.addEventListener('click', () => {
     const startLocation = display.textContent.lastIndexOf(" ") + 1;
     //Set the second operand
     secondOperand = Number(display.textContent.slice(startLocation));
-    console.log(`second operand: ${secondOperand}`)
     let results = procedures(procedure);
     display.textContent = String(results(firstOperand,secondOperand));
     firstOperand = Number(display.textContent);
     operand = false;
-})
+});
