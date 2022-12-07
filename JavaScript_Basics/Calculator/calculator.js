@@ -32,7 +32,7 @@ function procedures (str) {
     };
 }
 // Set inital Display to 0
-const display = document.getElementById('display');
+const display = document.getElementById('input');
 display.textContent = "0";
 
 // set a and b initial to zero and no procedure by default
