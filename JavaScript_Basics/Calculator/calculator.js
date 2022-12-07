@@ -43,3 +43,10 @@ const clear = document.getElementById('clear');
 
 //Clear the display when Clear button Clicked
 clear.addEventListener('click', () => display.textContent="0")
+
+
+//Get the Delete button
+const deleteButton = document.getElementById('delete');
+
+//Delete the last input number from the display
+deleteButton.addEventListener('click', () => display.textContent = display.textContent.slice(0,-1));
