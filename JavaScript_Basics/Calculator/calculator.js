@@ -50,3 +50,19 @@ const deleteButton = document.getElementById('delete');
 
 //Delete the last input number from the display
 deleteButton.addEventListener('click', () => display.textContent = display.textContent.slice(0,-1));
+
+
+//Set Operand inital to false, because we don't have one yet.
+let operand = false;
+
+//Get all the Operator buttons
+const operators = document.querySelectorAll('.operator');
+
+//Add event listeners to all the operators.
+operators.forEach((operator) => {
+    operator.addEventListener('click', (e) => {
+        //const firstOperand = Number(display.textContent);
+        display.textContent += ` ${e.target.textContent} `
+        operand = true;
+    })
+})
