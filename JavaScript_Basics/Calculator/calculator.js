@@ -36,3 +36,10 @@ numbers.forEach((number) => {
         display.textContent += number.textContent
     });
 });
+
+
+//Get the Clear button
+const clear = document.getElementById('clear');
+
+//Clear the display when Clear button Clicked
+clear.addEventListener('click', () => display.textContent="0")
