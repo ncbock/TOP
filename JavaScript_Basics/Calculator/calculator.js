@@ -14,11 +14,28 @@ function divide (a, b) {
     return a / b;
 }
 
+function procedures (str) {
+    if (str === "+") {
+        return addition;
+    };
+    if(str === "-"){
+        return subtraction;
+    };
+    if(str ==="x"){
+        return multiply;
+    };
+    if(str === "/"){
+        return divide;
+    };
+}
 // Set inital Display to 0
 const display = document.getElementById('display');
 display.textContent = "0";
 
-
+// set a and b initial to zero and no procedure by default
+let firstOperand;
+let secondOperand;
+let procedure;
 
 
 //Get all the number buttons 
@@ -38,11 +55,17 @@ numbers.forEach((number) => {
 });
 
 
+
 //Get the Clear button
 const clear = document.getElementById('clear');
 
 //Clear the display when Clear button Clicked
-clear.addEventListener('click', () => display.textContent="0")
+clear.addEventListener('click', () => {
+    display.textContent="0"
+    firstOperand = 0;
+    secondOperand = 0;
+    procedure=""
+});
 
 
 //Get the Delete button
@@ -61,8 +84,27 @@ const operators = document.querySelectorAll('.operator');
 //Add event listeners to all the operators.
 operators.forEach((operator) => {
     operator.addEventListener('click', (e) => {
-        //const firstOperand = Number(display.textContent);
-        display.textContent += ` ${e.target.textContent} `
-        operand = true;
-    })
+        if (!operand){
+            firstOperand = Number(display.textContent);
+            display.textContent += ` ${e.target.textContent} `
+            operand = true;
+            procedure = e.target.textContent;
+        };
+    });
+});
+
+//Get the equal Button
+const equalButton = document.getElementById('equal');
+
+//add event listener for equal button
+equalButton.addEventListener('click', () => {
+    //get the index were the secondnumber starts
+    const startLocation = display.textContent.lastIndexOf(" ") + 1;
+    //Set the second operand
+    secondOperand = Number(display.textContent.slice(startLocation));
+    console.log(`second operand: ${secondOperand}`)
+    let results = procedures(procedure);
+    display.textContent = String(results(firstOperand,secondOperand));
+    firstOperand = Number(display.textContent);
+    operand = false;
 })
