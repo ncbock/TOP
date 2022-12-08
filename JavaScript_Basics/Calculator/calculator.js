@@ -39,6 +39,7 @@ display.textContent = "0";
 let firstOperand;
 let secondOperand;
 let procedure;
+let decimal = false;
 
 
 //Get all the number buttons 
@@ -50,8 +51,11 @@ numbers.forEach((number) => {
         if (display.textContent === "0"){
             display.textContent = "";
         }
-        if (display.textContent.includes(".") && e.target.textContent === "."){
+        if (decimal && e.target.textContent === "."){
             return
+        }
+        if(e.target.textContent === "."){
+            decimal = true
         }
         if (!operand && firstOperand !== 0){
             clearButtonPressed();
@@ -100,6 +104,7 @@ operators.forEach((operator) => {
             performCalculations();
         };
         operand = true;
+        decimal = false;
         procedure = e.target.textContent;
         display.textContent += ` ${e.target.textContent} `;
     });
@@ -120,4 +125,4 @@ function performCalculations(){
      display.textContent = String(results(firstOperand,secondOperand));
      firstOperand = Number(display.textContent);
      operand = false;
-}
+};
