@@ -89,7 +89,13 @@ function clearButtonPressed(){
 const deleteButton = document.getElementById('delete');
 
 //Delete the last input number from the display
-deleteButton.addEventListener('click', () => display.textContent = display.textContent.slice(0,-1));
+deleteButton.addEventListener('click', () => {
+    if (display.textContent.length === 1){
+        display.textContent = "0"
+    } else {
+        display.textContent = display.textContent.slice(0,-1)
+    };
+});
 
 
 //Set Operand inital to false, because we don't have one yet.
