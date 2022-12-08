@@ -48,26 +48,33 @@ const numbers = document.querySelectorAll('.number');
 
 //Update the display when a number is pressed
 numbers.forEach((number) => {
-    number.addEventListener('click', (e) => {
-        if (display.textContent === "0"){
-            display.textContent = "";
-        }
-        if (decimal && e.target.textContent === "."){
-            return
-        }
-        if(e.target.textContent === "."){
-            decimal = true
-        }
-        //If we got a result previously and then a new number is pressed
-        //The screen should clear and then we start with the new number
-        //instead of chaining together things
-        if (!operator && firstOperand !== 0){
-            clearButtonPressed();
-            display.textContent = "";
-        }
-        display.textContent += number.textContent
-    });
+    number.addEventListener('click', numbersPressed);
 });
+
+function numbersPressed(e){
+    if (display.textContent === "0"){
+        display.textContent = "";
+    }
+    if (decimal && (e.target.textContent === "." || e.key === ".")){
+        return
+    }
+    if(e.target.textContent === "." || e.key === "."){
+        decimal = true
+    }
+    //If we got a result previously and then a new number is pressed
+    //The screen should clear and then we start with the new number
+    //instead of chaining together things
+    if (!operator && firstOperand !== 0){
+        clearButtonPressed();
+        display.textContent = "";
+    }
+    console.log(e)
+    if (e.type === "click"){
+        display.textContent += e.target.textContent;
+    } else {
+        display.textContent += e.key;
+    }
+}
 
 
 
@@ -89,13 +96,16 @@ function clearButtonPressed(){
 const deleteButton = document.getElementById('delete');
 
 //Delete the last input number from the display
-deleteButton.addEventListener('click', () => {
+deleteButton.addEventListener('click', backSpace);
+
+function backSpace (){
     if (display.textContent.length === 1){
         display.textContent = "0"
     } else {
         display.textContent = display.textContent.slice(0,-1)
     };
-});
+};
+
 
 
 //Set Operand inital to false, because we don't have one yet.
@@ -153,3 +163,14 @@ function performCalculations(){
      firstOperand = Number(display.textContent);
      operator = false;
 };
+
+
+document.addEventListener('keydown', (e) => {
+    if (Number(e.key) >= 0 && Number(e.key) <= 9 ){
+        numbersPressed(e)
+    };
+    if (e.key === "Backspace"){
+        backSpace();
+    }
+    console.log(e);
+})
