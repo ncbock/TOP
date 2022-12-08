@@ -24,7 +24,7 @@ function procedures (str) {
     if(str === "-"){
         return subtraction;
     };
-    if(str ==="x"){
+    if(str ==="x" || str === "*"){
         return multiply;
     };
     if(str === "/"){
@@ -117,21 +117,35 @@ const operators = document.querySelectorAll('.operator');
 //Add event listeners to all the operators.
 operators.forEach((button) => {
     button.addEventListener('click', (e) => {
-        if (!operator){
-            firstOperand = Number(display.textContent);
-        } 
-        else {
-            // There will be a second operand if there is something after the second space
-            // Added by inserting the operator. If there is a second operand perform 
-            // the calculations.
-            performCalculations();
-        };
-        operator = true;
-        decimal = false;
-        procedure = e.target.textContent;
-        display.textContent += ` ${e.target.textContent} `;
+        operations(e);
     });
 });
+
+function operations(e){
+    if (!operator){
+        firstOperand = Number(display.textContent);
+    } 
+    else {
+        // There will be a second operand if there is something after the second space
+        // Added by inserting the operator. If there is a second operand perform 
+        // the calculations.
+        performCalculations();
+    };
+    operator = true;
+    decimal = false;
+    if (e.type === "click"){
+        procedure = e.target.textContent;
+        display.textContent += ` ${e.target.textContent} `;
+    } else {
+        procedure = e.key;
+        if (e.key === "*"){
+            display.textContent += ` x `;
+        } else {
+            display.textContent += ` ${e.key} `
+        }
+    }
+    
+};
 
 //Get the equal Button
 const equalButton = document.getElementById('equal');
@@ -172,5 +186,8 @@ document.addEventListener('keydown', (e) => {
     if (e.key === "Backspace"){
         backSpace();
     }
+    if (e.key === "x" || e.key === "*" || e.key === "+" || e.key === "-" || e.key === "/"){
+        operations(e);
+    };
     console.log(e);
-})
+});
