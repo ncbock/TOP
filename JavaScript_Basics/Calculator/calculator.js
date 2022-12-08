@@ -68,12 +68,15 @@ function numbersPressed(e){
         clearButtonPressed();
         display.textContent = "";
     }
-    console.log(e)
     if (e.type === "click"){
         display.textContent += e.target.textContent;
     } else {
         display.textContent += e.key;
     }
+    if (display.textContent.length > 15){
+        alert('Your expression is getting too long! \n Please limit to 15 characters');
+        clearButtonPressed();
+    };
 }
 
 
@@ -89,6 +92,7 @@ function clearButtonPressed(){
     firstOperand = 0;
     secondOperand = 0;
     procedure=""
+    operator = false;
 }
 
 
