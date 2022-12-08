@@ -39,6 +39,7 @@ display.textContent = "0";
 let firstOperand;
 let secondOperand;
 let procedure;
+//tracking for when a decimal is placed in a number
 let decimal = false;
 
 
@@ -57,7 +58,10 @@ numbers.forEach((number) => {
         if(e.target.textContent === "."){
             decimal = true
         }
-        if (!operand && firstOperand !== 0){
+        //If we got a result previously and then a new number is pressed
+        //The screen should clear and then we start with the new number
+        //instead of chaining together things
+        if (!operator && firstOperand !== 0){
             clearButtonPressed();
             display.textContent = "";
         }
@@ -89,21 +93,24 @@ deleteButton.addEventListener('click', () => display.textContent = display.textC
 
 
 //Set Operand inital to false, because we don't have one yet.
-let operand = false;
+let operator = false;
 
 //Get all the Operator buttons
 const operators = document.querySelectorAll('.operator');
 
 //Add event listeners to all the operators.
-operators.forEach((operator) => {
-    operator.addEventListener('click', (e) => {
-        if (!operand){
+operators.forEach((button) => {
+    button.addEventListener('click', (e) => {
+        if (!operator){
             firstOperand = Number(display.textContent);
         } 
         else {
+            // There will be a second operand if there is something after the second space
+            // Added by inserting the operator. If there is a second operand perform 
+            // the calculations.
             performCalculations();
         };
-        operand = true;
+        operator = true;
         decimal = false;
         procedure = e.target.textContent;
         display.textContent += ` ${e.target.textContent} `;
@@ -120,9 +127,23 @@ function performCalculations(){
      //get the index were the secondnumber starts
      const startLocation = display.textContent.lastIndexOf(" ") + 1;
      //Set the second operand
-     secondOperand = Number(display.textContent.slice(startLocation));
+     secondOperand = display.textContent.slice(startLocation);
+
+     //This function can get called when switching operators. We need to check to see if the
+     //Second operand has been entered. We do this by checking the length of the second
+     //Operand. If length is > 0 then we set it (to a number).
+     if(secondOperand.length > 0){
+        secondOperand = Number(secondOperand);
+     } else{
+        //If it is not > 0 then we reset the screen to be just the first operand. The operator
+        //Will then update to the new operator in the "operators" event function.
+        //We return at this point and don't perform the calculations yet untill we have 
+        //Both operands.
+        display.textContent = String(firstOperand);
+        return  
+     };
      let results = procedures(procedure);
      display.textContent = String(results(firstOperand,secondOperand));
      firstOperand = Number(display.textContent);
-     operand = false;
+     operator = false;
 };
