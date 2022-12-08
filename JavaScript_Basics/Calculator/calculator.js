@@ -151,9 +151,11 @@ function operations(e){
 const equalButton = document.getElementById('equal');
 
 //add event listener for equal button
-equalButton.addEventListener('click', performCalculations);
+equalButton.addEventListener('click', (e) => {
+    performCalculations(e)
+});
 
-function performCalculations(){
+function performCalculations(e){
      //get the index were the secondnumber starts
      const startLocation = display.textContent.lastIndexOf(" ") + 1;
      //Set the second operand
@@ -169,7 +171,9 @@ function performCalculations(){
         //Will then update to the new operator in the "operators" event function.
         //We return at this point and don't perform the calculations yet untill we have 
         //Both operands.
-        display.textContent = String(firstOperand);
+        if (e.type === 'click'){
+            display.textContent = String(firstOperand);
+        }
         return  
      };
      let results = procedures(procedure);
@@ -189,5 +193,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === "x" || e.key === "*" || e.key === "+" || e.key === "-" || e.key === "/"){
         operations(e);
     };
-    console.log(e);
+    if ((e.key === "=" || e.key === "Enter") && operator){
+        performCalculations(e);
+    }
 });
