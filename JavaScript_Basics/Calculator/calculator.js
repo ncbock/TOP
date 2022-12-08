@@ -48,10 +48,14 @@ const numbers = document.querySelectorAll('.number');
 numbers.forEach((number) => {
     number.addEventListener('click', (e) => {
         if (display.textContent === "0"){
-            display.textContent = ""
+            display.textContent = "";
         }
         if (display.textContent.includes(".") && e.target.textContent === "."){
             return
+        }
+        if (!operand && firstOperand !== 0){
+            clearButtonPressed();
+            display.textContent = "";
         }
         display.textContent += number.textContent
     });
@@ -63,12 +67,14 @@ numbers.forEach((number) => {
 const clear = document.getElementById('clear');
 
 //Clear the display when Clear button Clicked
-clear.addEventListener('click', () => {
+clear.addEventListener('click', clearButtonPressed);
+
+function clearButtonPressed(){
     display.textContent="0"
     firstOperand = 0;
     secondOperand = 0;
     procedure=""
-});
+}
 
 
 //Get the Delete button
@@ -89,10 +95,13 @@ operators.forEach((operator) => {
     operator.addEventListener('click', (e) => {
         if (!operand){
             firstOperand = Number(display.textContent);
-            operand = true;
-            procedure = e.target.textContent;
-            display.textContent += ` ${e.target.textContent} `;
         } 
+        else {
+            performCalculations();
+        };
+        operand = true;
+        procedure = e.target.textContent;
+        display.textContent += ` ${e.target.textContent} `;
     });
 });
 
@@ -100,13 +109,15 @@ operators.forEach((operator) => {
 const equalButton = document.getElementById('equal');
 
 //add event listener for equal button
-equalButton.addEventListener('click', () => {
-    //get the index were the secondnumber starts
-    const startLocation = display.textContent.lastIndexOf(" ") + 1;
-    //Set the second operand
-    secondOperand = Number(display.textContent.slice(startLocation));
-    let results = procedures(procedure);
-    display.textContent = String(results(firstOperand,secondOperand));
-    firstOperand = Number(display.textContent);
-    operand = false;
-});
+equalButton.addEventListener('click', performCalculations);
+
+function performCalculations(){
+     //get the index were the secondnumber starts
+     const startLocation = display.textContent.lastIndexOf(" ") + 1;
+     //Set the second operand
+     secondOperand = Number(display.textContent.slice(startLocation));
+     let results = procedures(procedure);
+     display.textContent = String(results(firstOperand,secondOperand));
+     firstOperand = Number(display.textContent);
+     operand = false;
+}
