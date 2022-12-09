@@ -1,16 +1,20 @@
 #calc-body{
+    background-color: #747272;
     height: 480px;
     width: 400px;
     border-style: solid;
     border-width: 2px;
     position: relative;
+    border-radius: 8px;
 }
 
 #display{
+    background-color: #cdcbcb;
     height:120px;
     width: 360px;
     border-style: solid;
     border-width: 1px;
+    border-radius: 6px;
     position: absolute;
     left: 20px;
     top: 20px;
@@ -42,13 +46,18 @@
     width: 81px;
 }
 
+.operator{
+    background-color: #b3d9ff;
+    border-radius: 6px;
+}
+
 #functionality{
     display: flex;
     flex-direction: row;
     gap: 12px;
     position: absolute;
     bottom: 268px;
-    left: 35px;
+    left: 44px;
 }
 
 .selectors{
@@ -56,9 +65,18 @@
 }
 
 .wide{
-    width:120px;
+    width:150px;
+    background-color: #f9f986;
 }
 
-.narrow{
-    width: 66px;
+
+button{
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 6px;
+    border-color: #4d4c4c;
+}
+
+button:hover{
+    filter:brightness(85%)
 }

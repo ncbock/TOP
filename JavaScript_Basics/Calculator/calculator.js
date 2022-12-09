@@ -188,6 +188,9 @@ function performCalculations(e){
 
 
 document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape"){
+        clearButtonPressed();
+    }
     if (Number(e.key) >= 0 && Number(e.key) <= 9 ){
         numbersPressed(e)
     };
