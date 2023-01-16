@@ -8,11 +8,23 @@
     <body>
       <h1>
         The Title of your webpage
-      </h1>
-      <div id = "container">
-      </div>
-      <button id ="1">Click Me</button>
-      <button id ="2">Click Me</button>
-      <button id ="3">Click Me</button>
-    </body>
+      <form>
+        <label for="user_email">Email Address:</label>
+        <input type="email" id="user_email" name="email" placeholder="you@example.com">
+        <label for="user_password">Password:</label>
+        <input type="password" id="user_password" name="password">
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob">
+        <textarea>Some initial content</textarea>
+        <select name="Car">
+          <option value="mercedes">Mercedes</option>
+          <option value="tesla">Tesla</option>
+          <option value="volvo">Volvo</option>
+          <option value="bmw">BMW</option>
+          <option value="mini">Mini</option>
+          <option value="ford">Ford</option>
+        </select>
+      </form>
 </html>
